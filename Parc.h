@@ -1,7 +1,3 @@
-//
-//  Parcellation.hpp
-//  VavlabAlgortihm2
-
 #ifndef Parcellation_h
 #define Parcellation_h
 #define cost_coeff 10
@@ -48,7 +44,9 @@ namespace Vav {
         
         class sort_indices
         {
-            
+        // function to sort the items in a 2D vector (in the first algorithm voxel labels changed according to the following rule: 
+        // boundary voxels found and we check how much they are correlated with the current and neighbor parcel. Relative cost function is calculated and sorted for all boundary voxels.
+        // Voxels decreasing the relative cost function (i.e. increasing the correlation in a parcel) change their label)   
         public:
             typedef std::vector<std::vector<float>> Vec2D;
             sort_indices(Vec2D* parr) : mparr(parr) {}
@@ -66,9 +64,7 @@ namespace Vav {
             typedef itk::Image<unsigned int, 3> ParcelImageType;
             typedef itk::Image<float, 4> RawFMRIImageType;
             typedef vnl_vector<float> TimeSignalType;
-            //            typedef itk::VariableLengthVector<float> TimeSignalType;
             typedef itk::Image<TimeSignalType, 3> FMRIImageType;
-            //typedef itk::ImageDuplicator< ImageType > DuplicatorType;
 
             Parcellation ();
             ~Parcellation();
@@ -97,16 +93,15 @@ namespace Vav {
             RawFMRIImageType::Pointer rawFMRIImage = RawFMRIImageType::New();
             
             //            Declaration of input related specifications
+            //            cortex voxel labels are between 11000 and 13000
             unsigned int lowerBoundOfCortexLabels;
             unsigned int upperBoundOfCortexLabels;
             
             //            Declaration of parcel and fmri images to be used
             ParcelImageType::Pointer parcelImage = ParcelImageType::New();
-            //ParcelImageType::Pointer parcelImage_1 = ParcelImageType::New();
             ParcelImageType::Pointer initialParcelImage = ParcelImageType::New();
 			ParcelImageType::Pointer finalParcelImage = ParcelImageType::New();
             FMRIImageType::Pointer fmriImage = FMRIImageType::New();
-           // DuplicatorType::Pointer duplicator = DuplicatorType::New();
             
             //            Old labels
             std::vector<ParcelImageType::PixelType> labels;
@@ -131,7 +126,7 @@ namespace Vav {
             typedef itk::Image<float,3> DirectionOfEvolutionImageType;
             DirectionOfEvolutionImageType::Pointer directionImage = DirectionOfEvolutionImageType::New();
             void findBoundaryVoxelsAndDisplacementField();
-            //void calculate_and_switch();
+            void calculate_and_switch();
             
             //            Smoothing displacement field
             void smoothDisplacementField();
@@ -147,7 +142,6 @@ namespace Vav {
             void checkZeros();
 
             //            Calculate correlations
-            
             std::vector<itk::PointSet<vnl_vector<float>>::Pointer> evaluationData;
             void fillEvaluationData();
             void calculateMeanCorrelations();
@@ -155,7 +149,8 @@ namespace Vav {
             std::vector<std::vector<int>> results_volume;
             std::string resultFilename = "/Users/Mehmet/Desktop/VAVLab/network/AD/svd/unnamed.txt";
 
-             // Parcel downsizing
+             // Parcel downsizing: in case we want to limit the max voxel population of a parcel. Parcel volume variability is usually high in the existing atlas.
+             // Further examination of functional homogeneity is possible with this parameter. Although it increases the intra parcel correlation of the signals, it is a questionable procedure and not justified here.
             int maxNumberOfParcelPopulation;
             void downsizeParcels();
 			std::vector<ParcelImageType::PixelType> labelsAfterDownsizing;
