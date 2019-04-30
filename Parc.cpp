@@ -15,7 +15,12 @@ Vav::Parcellation::Parcellation::~Parcellation(){
 
 }
 
+
+
 void Vav::Parcellation::Parcellation::SetParcelImage(ParcelImageType::Pointer p){
+	/*
+	After reading parcel image, it should be set to parcellation object using this function
+	*/
 	std::clock_t startTime = std::clock();
 	rawParcelImage = p;
 	rawParcelImage->Update();
@@ -23,7 +28,11 @@ void Vav::Parcellation::Parcellation::SetParcelImage(ParcelImageType::Pointer p)
 	std::cout << "Parcel image set in " << double(endTime - startTime) / CLOCKS_PER_SEC << " seconds.\n";
 }
 
+
 void Vav::Parcellation::Parcellation::SetFMRIImage(RawFMRIImageType::Pointer p){
+	/*
+	After reading fmri image, it should be set to parcellation object using this function
+	*/
 	std::clock_t startTime = std::clock();
 	rawFMRIImage = p;
 	rawFMRIImage->Update();
@@ -31,15 +40,27 @@ void Vav::Parcellation::Parcellation::SetFMRIImage(RawFMRIImageType::Pointer p){
 	std::cout << "FMRI image set in " << double(endTime - startTime) / CLOCKS_PER_SEC << " seconds.\n";
 }
 
+
 void Vav::Parcellation::Parcellation::SetBoundOfCortexLabels(const unsigned int lower, const unsigned int upper){
+	/*
+	Parcellation image contains not only cortex of the human brain but also the other parts. 
+	In order to specify which region the algorithm will work on, we need to specify the interval 
+	that is used for cortex labelling. In our case, cortex is labelled with numbers between 11000 and 13000, 
+	therefore we set the interval as 
+		parcellation.SetBoundOfCortexLabels(11000, 13000);
+	*/
 	upperBoundOfCortexLabels = upper;
 	lowerBoundOfCortexLabels = lower;
 	std::cout << "Cortex label bounds set.\n";
 }
 
-//------------------------------------------------------------------------------------
-//Parcellation Update Begin
+
+
 bool IsLabelIncluded(Vav::Parcellation::Parcellation::ParcelImageType::PixelType a, std::vector<Vav::Parcellation::Parcellation::ParcelImageType::PixelType> &vec){
+	/*
+	This function is used to check if the labels vector, which contains all the cortex labels, contains a specific label.
+	We used this function in preprocessing part when transforming cortex labels into numbers 1,2,3,... and set zero for the rest of the brain.
+	*/
 	if (std::find(vec.begin(), vec.end(), a) != vec.end()) {
 		return true;
 	}
@@ -49,6 +70,9 @@ bool IsLabelIncluded(Vav::Parcellation::Parcellation::ParcelImageType::PixelType
 }
 
 Vav::Parcellation::Parcellation::ParcelImageType::PixelType GetNewLabel(Vav::Parcellation::Parcellation::ParcelImageType::PixelType oldLabel, std::vector<Vav::Parcellation::Parcellation::ParcelImageType::PixelType> &vec){
+	/*
+	We used this function while transforming labels of the parcel image into 1,2,3,etc for cortex and zero for the rest of the brain.
+	*/
 	if (oldLabel == 0) {
 		return 0;
 	}
