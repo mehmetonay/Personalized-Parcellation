@@ -41,6 +41,16 @@ If you would like to divide big parcels before algorithm starts its job, you sho
 ```c++
 parcellation.SetMaxParcelPopulation(800); //ensures each parcel has voxels less than 800
 ```
+You should also set the path for text file in which correlation and volume statistics are written after each iteration.
+```c++
+parcellation.SetResultsFilename("RESULTS_TEXT_FILE_PATH.txt");
+```
+You should set the output path for the personalized cortical parcellation.
+```c++
+outputFilename = "PATH_TO_OUTPUT_PARCELLATION.par.nii";
+```
+
+If you want to use the algorithm entegrated your code, what you need to do is to create an instance of Parcellation class, and set necessary inputs. You can check which inputs you should check by looking at main.cxx file. Please be sure that parcellation and fMRI images are ITK images of proper type.
 
 ## Header 2
 Something about header 2
