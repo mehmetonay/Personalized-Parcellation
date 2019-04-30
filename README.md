@@ -1,6 +1,6 @@
 # fMRI Guided Personalization of Cortical Parcellation Maps
 
-M S Onay, BSC; U Kucukaslan, BSC; C Ulasoglu Yildiz, PhD; B Acar, PhD
+M Onay, BSC; U Kucukaslan, BSC; C Ulasoglu Yildiz, PhD; B Acar, PhD
 
 ## Abstract
 
@@ -25,19 +25,9 @@ In order to use the code, you need the following libraries installed on your com
 - ITK
 - Eigen
 
-```bash
-pip install numpy
-```
-
-Python code can be shown like
-```python
-import os
-
-print("hey man")
-```
 
 ## Usage
-In order to use our code, 
+
 
 C++ code can be shown as 
 ```c++
