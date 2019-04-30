@@ -1,5 +1,5 @@
 // Umut Küçükaslan
-// Mehmet Said Onay
+// Mehmet Onay
 
 //ITK LIBRARIES
 #include <itkImage.h>
