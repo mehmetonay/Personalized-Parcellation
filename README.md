@@ -21,7 +21,9 @@ fMRI guided personalization of 3D cortical parcellation maps significantly impro
 
 ## Installation
 
-something
+In order to use the code, you need the following libraries installed on your computer
+- ITK
+- Eigen
 
 ```bash
 pip install numpy
@@ -33,6 +35,9 @@ import os
 
 print("hey man")
 ```
+
+## Usage
+In order to use our code, 
 
 C++ code can be shown as 
 ```c++
