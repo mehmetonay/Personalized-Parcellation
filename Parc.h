@@ -45,7 +45,7 @@ namespace Vav {
         {
         // function to sort the items in a 2D vector (in the first algorithm voxel labels changed according to the following rule: 
         // boundary voxels found and we check how much they are correlated with the current and neighbor parcel. Relative cost function is calculated and sorted for all boundary voxels.
-        // Voxels decreasing the relative cost function (i.e. increasing the correlation in a parcel) change their label)   
+        // Voxels decreasing the relative cost function (i.e. increasing the correlation more for a possible label change) change their label   
         public:
             typedef std::vector<std::vector<float>> Vec2D;
             sort_indices(Vec2D* parr) : mparr(parr) {}
