@@ -1,5 +1,5 @@
 #Umut Küçükaslan
-#Mehmet Said Onay
+#Mehmet Onay
 
 cmake_minimum_required(VERSION 2.8.12)
  
