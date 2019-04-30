@@ -33,6 +33,14 @@ You should set input paths
 std::string parcelImageFilePath = "PATH_TO_PARCELLATION_IMAGE.par.nii";
 std::string fmriImageFilePath = "PATH_TO_FMRI_IMAGE.fmri.nii.gz";
 ```
+The script will read images and set them to parcellation object. The next parameter you should set is the interval for cortex labels. This will enable algorithm to find the cortex region to work onto. Set the interval as
+```c++
+parcellation.SetBoundOfCortexLabels(11000, 13000);
+```
+If you would like to divide big parcels before algorithm starts its job, you should set the maximum number of voxels allowed in a parcel. This will divide each parcel bigger than the limit into two. It combines the divided parts after the algorithm is run. Do not forget to uncomment relevant function call in doSomething function in Parcellation.cpp
+```c++
+parcellation.SetMaxParcelPopulation(800); //ensures each parcel has voxels less than 800
+```
 
 ## Header 2
 Something about header 2
