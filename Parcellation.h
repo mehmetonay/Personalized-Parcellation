@@ -1,3 +1,6 @@
+// Umut Küçükaslan
+// Mehmet Said Onay
+
 #ifndef Parcellation_h
 #define Parcellation_h
 #define cost_coeff 10
