@@ -25,7 +25,7 @@ main(){
 }
 ```
 
-##header 2
+## Header 2
 Something about header 2
 
 ## License
