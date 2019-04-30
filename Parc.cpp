@@ -179,6 +179,8 @@ void Vav::Parcellation::Parcellation::Update(){
 
 
 	//    4D FMRI image is transformed into a 3D vector image
+	// We used vector multiplication to calculate correlation coefficients, for that, we need fmri
+	// signals to be vectors. That is why we transform 4D fmri image into 3D image that contains time signals at each voxel.
 	std::cout << "Starting 4D fmri to 3D fmri transformation...\n";
 	startTime = clock();
 
