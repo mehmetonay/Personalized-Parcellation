@@ -4,19 +4,6 @@
 #include <itkImageFileReader.h>
 #include <itkVariableLengthVector.h>
 
-/*
-//VTK LIBRARIES
-#include <itkImageToVTKImageFilter.h>
-#include <vtkVersion.h>
-#include <vtkImageViewer.h>
-#include <vtkImageMapper3D.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkSmartPointer.h>
-#include <vtkImageActor.h>
-#include <vtkInteractorStyleImage.h>
-#include <vtkRenderer.h>
-#include <QuickView.h>
-*/
 //STANDARD LIBRARIES
 #include <iostream>
 #include <fstream>
