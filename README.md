@@ -26,14 +26,12 @@ In order to use the code, you need the following libraries installed on your com
 - Eigen
 
 ## Usage
-You need a fMRI image with its registered cortical parcellation in order to use this code. Once you have these inputs, you need to specify input and output paths file as well as other parameters in "main.cpp" file.
+You need a fMRI image with its registered cortical parcellation in order to use this code. Once you have these inputs, you need to specify input and output paths as well as other parameters in main.cxx file. Then, you should run main.cxx file.
 
-C++ code can be shown as 
+You should set input paths
 ```c++
-include <iostream>
-main(){
-  print("hey man");
-}
+std::string parcelImageFilePath = "PATH_TO_PARCELLATION_IMAGE.par.nii";
+std::string fmriImageFilePath = "PATH_TO_FMRI_IMAGE.fmri.nii.gz";
 ```
 
 ## Header 2
