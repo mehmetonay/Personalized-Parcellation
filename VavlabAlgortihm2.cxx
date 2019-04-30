@@ -90,6 +90,8 @@ int main(int argc, char *argv[])
 		parcellation.SetBoundOfCortexLabels(11000, 13000);
 		parcellation.Update();
 
+		//yeniden eklemeler umut
+
 		parcellation.SetMaxParcelPopulation(maxParcelPopulation); // In case the big parcels are to be divided
 		parcellation.SetResultsFilename("/Users/Mehmet/Desktop/VAVLab/network/AD/svdlike/" + patientName + "_svdlike_L025_I30.txt");
 		parcellation.doSomethingg();
