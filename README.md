@@ -3,10 +3,11 @@
 M S Onay, BSC; U Kucukaslan, BSC; C Ulasoglu Yildiz, PhD; B Acar, PhD
 
 ## Abstract
-### Purpose
+
+### PURPOSE
 To personalize the 3D cortical parcellation of T1w MRI volumes to increase intra-parcel functional homogeneity by means of co-registered fMRI guidance. 
  
-### Methods and Materials
+### METHODS AND MATERIALS
 Inspired by the Demons Algorithm (Med. Image Anal., 2(3), pp 243-260,1998), we propose an iterative 3D deformation of the cortical parcellation map of a given subject, constrained to the cortex, to maximize the pairwise intra-parcel correlation coefficients (CCs) of fMRI BOLD signals (B). The co-registered T1w MRI, fMRI and (148 parcel, P) Destrieux cortical parcellation map are the inputs. The iterations are driven by a vector-field, F(rij), normal to boundary (rij) of Pi and Pj, and zero elsewhere. F is computed according to a local cost that takes into account the change in intra-parcel functional homogeneity and parcel volume change (ΔV). The former uses the CCs between the local signal, B(rij), and the parcel representative signals (Bi, Bj) defined as the in-parcel B that is closest to the left principal singular vector of the matrix composed of parcel's B's. The latter is added with a multiplicative factor λ. We used FreeSurfer and FSL for all co-registration and parcellation steps. We tested the algorithm on 5 normal subjects for λ=0 and 0.25, by measuring the mean of pairwise CCs between in-parcel B's and the mean B per parcel, before and after the algorithm, for each subject. Statistical significance is assessed with paired t-test of CCs per parcel per subject and mean values over subjects is reported. The mean of subject-wise minimum and maximum parcel volumes (Vmin, Vmax) are reported together with the percentage of parcels with ΔV>20%.
  
 ### RESULTS
@@ -18,6 +19,7 @@ The proposed functionally homogeneizing personalization of cortical parcellation
 ### CLINICAL RELEVANCE/APPLICATION
 fMRI guided personalization of 3D cortical parcellation maps significantly improves intra-parcel functional homogeneity, and can potentially improve brain network models.
 
+## Installation
 
 something
 
