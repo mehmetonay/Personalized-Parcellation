@@ -1,5 +1,5 @@
 // Umut Küçükaslan
-// Mehmet Said Onay
+// Mehmet Onay
 
 #include "Parcellation.h"
 
