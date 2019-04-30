@@ -1,23 +1,19 @@
-//
-//  Parcellation.cpp
-//  VavlabAlgortihm2
-//
-//
-//
-
 #include "Parc.h"
 
-Vav::Parcellation::Parcellation::Parcellation(){
+Vav::Parcellation::Parcellation::Parcellation()
+{
 
 }
 
-Vav::Parcellation::Parcellation::~Parcellation(){
+Vav::Parcellation::Parcellation::~Parcellation()
+{
 
 }
 
 
 
-void Vav::Parcellation::Parcellation::SetParcelImage(ParcelImageType::Pointer p){
+void Vav::Parcellation::Parcellation::SetParcelImage(ParcelImageType::Pointer p)
+{
 	/*
 	After reading parcel image, it should be set to parcellation object using this function
 	*/
@@ -29,7 +25,8 @@ void Vav::Parcellation::Parcellation::SetParcelImage(ParcelImageType::Pointer p)
 }
 
 
-void Vav::Parcellation::Parcellation::SetFMRIImage(RawFMRIImageType::Pointer p){
+void Vav::Parcellation::Parcellation::SetFMRIImage(RawFMRIImageType::Pointer p)
+{
 	/*
 	After reading fmri image, it should be set to parcellation object using this function
 	*/
@@ -41,7 +38,8 @@ void Vav::Parcellation::Parcellation::SetFMRIImage(RawFMRIImageType::Pointer p){
 }
 
 
-void Vav::Parcellation::Parcellation::SetBoundOfCortexLabels(const unsigned int lower, const unsigned int upper){
+void Vav::Parcellation::Parcellation::SetBoundOfCortexLabels(const unsigned int lower, const unsigned int upper)
+{
 	/*
 	Parcellation image contains not only cortex of the human brain but also the other parts. 
 	In order to specify which region the algorithm will work on, we need to specify the interval 
@@ -56,7 +54,8 @@ void Vav::Parcellation::Parcellation::SetBoundOfCortexLabels(const unsigned int 
 
 
 
-bool IsLabelIncluded(Vav::Parcellation::Parcellation::ParcelImageType::PixelType a, std::vector<Vav::Parcellation::Parcellation::ParcelImageType::PixelType> &vec){
+bool IsLabelIncluded(Vav::Parcellation::Parcellation::ParcelImageType::PixelType a, std::vector<Vav::Parcellation::Parcellation::ParcelImageType::PixelType> &vec)
+{
 	/*
 	This function is used to check if the labels vector, which contains all the cortex labels, contains a specific label.
 	We used this function in preprocessing part when transforming cortex labels into numbers 1,2,3,... and set zero for the rest of the brain.
@@ -69,7 +68,8 @@ bool IsLabelIncluded(Vav::Parcellation::Parcellation::ParcelImageType::PixelType
 	}
 }
 
-Vav::Parcellation::Parcellation::ParcelImageType::PixelType GetNewLabel(Vav::Parcellation::Parcellation::ParcelImageType::PixelType oldLabel, std::vector<Vav::Parcellation::Parcellation::ParcelImageType::PixelType> &vec){
+Vav::Parcellation::Parcellation::ParcelImageType::PixelType GetNewLabel(Vav::Parcellation::Parcellation::ParcelImageType::PixelType oldLabel, std::vector<Vav::Parcellation::Parcellation::ParcelImageType::PixelType> &vec)
+{
 	/*
 	We used this function while transforming labels of the parcel image into 1,2,3,etc for cortex and zero for the rest of the brain.
 	*/
@@ -91,7 +91,8 @@ Vav::Parcellation::Parcellation::ParcelImageType::PixelType GetNewLabel(Vav::Par
 
 }
 
-void Vav::Parcellation::Parcellation::Update(){
+void Vav::Parcellation::Parcellation::Update()
+{
 
 	//    Performance calculation variables declared
 	std::clock_t startTime, endTime;
@@ -248,7 +249,8 @@ Vav::Parcellation::Parcellation::FMRIImageType::Pointer Vav::Parcellation::Parce
 	return fmriImage;
 }
 
-void Vav::Parcellation::Parcellation::createFinalParcelImage(){
+void Vav::Parcellation::Parcellation::createFinalParcelImage()
+{
 	 //Allocation of finalParcelImage
 
     ParcelImageType::RegionType::IndexType parcelStartIndex;
@@ -296,7 +298,8 @@ void Vav::Parcellation::Parcellation::createFinalParcelImage(){
 }
 
 
-void Vav::Parcellation::Parcellation::findSegmentInformation(){
+void Vav::Parcellation::Parcellation::findSegmentInformation()
+{
 	std::cout << "Starting finding segment information..." << std::endl;
 	std::clock_t startTime = std::clock();
 	std::clock_t startTimeTop = std::clock();
@@ -356,7 +359,9 @@ void Vav::Parcellation::Parcellation::findSegmentInformation(){
 	itSegmentMeans = segmentMeans.begin();
 	vnl_vector<int>::iterator itNumberOfSegmentVoxels;
 	itNumberOfSegmentVoxels = numberOfSegmentVoxels.begin();
-	while (itSegmentMeans != segmentMeans.end()) {
+
+	while (itSegmentMeans != segmentMeans.end()) 
+	{
 		(*itSegmentMeans).operator/=((*itNumberOfSegmentVoxels));
 		++itSegmentMeans;
 		++itNumberOfSegmentVoxels;
@@ -366,7 +371,7 @@ void Vav::Parcellation::Parcellation::findSegmentInformation(){
 	std::cout << "Dividing by # of voxels to obtain means performed in " << double(endTime - startTime) / CLOCKS_PER_SEC << " seconds" << std::endl;
 
 	// Finding SVD summary signals of the parcels
-
+	// All signals are put into a matrix as columns to find SVD decomposition
 	startTime = std::clock();
 
 	itParcel.GoToBegin();
@@ -391,6 +396,7 @@ void Vav::Parcellation::Parcellation::findSegmentInformation(){
 			++itFMRI;
 		}
 		
+		// All signals are put into a matrix as columns to find SVD decomposition
 		MatrixType _x(x[0].size(), x.size());
 		
 		for (int i = 0; i < x.size(); i++){
@@ -399,41 +405,37 @@ void Vav::Parcellation::Parcellation::findSegmentInformation(){
 			}
 		}
 
+		
 
-		//RedSVD::RedSVD<MatrixType> redsvd(_x);
 		Eigen::BDCSVD<MatrixType> SVD(_x, Eigen::DecompositionOptions::ComputeFullU);
 		
 		auto S = SVD.singularValues();
 		int maxindex;
  		auto max = S.maxCoeff(&maxindex);
- 		//std::cout<< max << std::endl;
 		auto vec = SVD.matrixU().col(maxindex);
-		//std::cout << vec.norm() << std::endl;
-		//std::cout << maxindex << "/" << SVD.matrixU().cols() << std::endl;
-		//vec.normalize();
-		// segmentSVDs[f - 1].clear();
+
 		for (int i = 0; i < vec.size(); i++)
 		{
 			segmentSVDs[f - 1].put(i, vec(i));
 		}
-	
+
+		// Due to the nature of SVD method here, left most singular vector might be found in the (-) direction.
+		// However it needs to be positively correlated with the parcel mean signal. In such a case, basic sign change of the vector will work.
 		if(dot_product(segmentSVDs[f - 1],segmentMeans[f - 1]) < 0)
 		{
 			segmentSVDs[f-1].operator*=(-1);
 		}
-		
+		// summary signal found above is used to find the "intrinsic summary signal" which corresponds to the voxel signal with
+		//the highest correlation with summary signal. It gives similar result in terms of increasing intra parcel correlation,
+		// however it makes the most difference in the graph based analysis. 
 		vnl_vector<float> g(x.size());
-		//g.clear();
 		for (int i = 0; i<x.size(); i++)
 		{
 		g[i] = dot_product(segmentSVDs[f-1],x[i]);
 		}
 		int indx = g.arg_max();
 		segmentSVDs[f - 1] = x[indx];
-		
-		//segmentSVDs[f - 1].operator-=(segmentSVDs[f - 1].mean());
-		//segmentSVDs[f - 1].normalize();
-		//std::cout << "Correlation of SVD signal and mean signal for Parcel  " << f << "  is " << dot_product(segmentSVDs[f - 1],segmentMeans[f - 1]) << std::endl;
+
 		++f;
 		itParcel.GoToBegin();
 		itFMRI.GoToBegin();
