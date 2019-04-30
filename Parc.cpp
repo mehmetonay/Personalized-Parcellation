@@ -297,6 +297,10 @@ void Vav::Parcellation::Parcellation::createFinalParcelImage(){
 
 
 void Vav::Parcellation::Parcellation::findSegmentInformation(){
+	/*
+	This function if used to generate segment representative signals, which is in this case, 
+	summary signals obtained using SVD decomposition. In order to do this,
+	*/
 	std::cout << "Starting finding segment information..." << std::endl;
 	std::clock_t startTime = std::clock();
 	std::clock_t startTimeTop = std::clock();
