@@ -465,7 +465,8 @@ Vav::Parcellation::Parcellation::ParcelImageType::Pointer Vav::Parcellation::Par
 void Vav::Parcellation::Parcellation::findBoundaryVoxelsAndDisplacementField()
 {
 	/*
-	This function finds 
+	This function finds which voxels are at the boundary and a normal vector at these boundary voxels, 
+	whose norm is going to be modulated later by correlation calculation.
 	*/
 
 	//    Performance calculation variables declared
@@ -784,8 +785,9 @@ int Vav::Parcellation::Parcellation::numberOfHolesInTheCortex(){
 }
 
 void Vav::Parcellation::Parcellation::growParcelRegionInTheCortex(){
-
-//    Temp parcel image declared
+	/*
+	This function fills the holes that is created in the cortex during warping.
+	*/
 
 	ParcelImageType::Pointer tempParcel = ParcelImageType::New();
 
