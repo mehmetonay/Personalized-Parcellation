@@ -670,8 +670,11 @@ void Vav::Parcellation::Parcellation::warpParcelImage(){
 }
 
 
-void Vav::Parcellation::Parcellation::checkZeros()
-{
+void Vav::Parcellation::Parcellation::checkZeros(){
+	/*
+	This function checks the interior and exterior part of the cortex to see 
+	if cortex has holes and if non-cortex has non-zero labels.
+	*/
 
     typedef itk::ImageRegionIterator<ParcelImageType> ParcelImageRegionIteratorType;
     ParcelImageRegionIteratorType itParcel(parcelImage, parcelImage->GetLargestPossibleRegion());
@@ -724,8 +727,10 @@ void Vav::Parcellation::Parcellation::checkZeros()
 }
 
 
-void Vav::Parcellation::Parcellation::setOutsideOfCortexToZero()
-{
+void Vav::Parcellation::Parcellation::setOutsideOfCortexToZero(){
+	/*
+	If the noncortex area has nonzero labels, this function makes them zero. These problems arise after warping the parcellation.
+	*/
 
     typedef itk::ImageRegionIterator<ParcelImageType> ParcelImageRegionIteratorType;
     ParcelImageRegionIteratorType itParcel(parcelImage, parcelImage->GetLargestPossibleRegion());
