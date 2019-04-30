@@ -1,3 +1,3 @@
-# fMRI Guided Personalization of Human Cortical Parcellation Maps
+# fMRI Guided Personalization of Cortical Parcellation Maps
 
 Mehmet Onay - Umut Küçükaslan
