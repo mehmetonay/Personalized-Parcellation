@@ -160,6 +160,4 @@ namespace Vav {
     }
 }
 
-
-
 #endif /* Parcellation_hpp */
