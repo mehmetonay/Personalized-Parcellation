@@ -125,7 +125,7 @@ namespace Vav {
             typedef itk::Image<float,3> DirectionOfEvolutionImageType;
             DirectionOfEvolutionImageType::Pointer directionImage = DirectionOfEvolutionImageType::New();
             void findBoundaryVoxelsAndDisplacementField();
-            void calculate_and_switch();
+            
             
             //            Smoothing displacement field
             void smoothDisplacementField();
