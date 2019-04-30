@@ -50,10 +50,9 @@ You should set the output path for the personalized cortical parcellation.
 outputFilename = "PATH_TO_OUTPUT_PARCELLATION.par.nii";
 ```
 
-If you want to use the algorithm entegrated your code, what you need to do is to create an instance of Parcellation class, and set necessary inputs. You can check which inputs you should check by looking at main.cxx file. Please be sure that parcellation and fMRI images are ITK images of proper type.
+If you want to use the algorithm entegrated your code, what you need to do is to create an instance of Parcellation class, and set necessary inputs. You can look at the usage of the parcellation class at main.cxx file. Please be sure that parcellation and fMRI images are ITK images of proper type.
 
 ## Header 2
 Something about header 2
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
