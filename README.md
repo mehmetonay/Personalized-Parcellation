@@ -25,9 +25,8 @@ In order to use the code, you need the following libraries installed on your com
 - ITK
 - Eigen
 
-
 ## Usage
-
+You need a fMRI image with its registered cortical parcellation in order to use this code. Once you have these inputs, you need to specify input and output paths file as well as other parameters in "main.cpp" file.
 
 C++ code can be shown as 
 ```c++
