@@ -1,3 +1,6 @@
+// Umut Küçükaslan
+// Mehmet Said Onay
+
 #include "Parcellation.h"
 
 Vav::Parcellation::Parcellation::Parcellation()
