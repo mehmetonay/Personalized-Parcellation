@@ -907,51 +907,7 @@ float Vav::Parcellation::Parcellation::sigmoidFunction(float x, float sigmoidCon
 void Vav::Parcellation::Parcellation::SetResultsFilename(std::string a){
     resultFilename = a;
 }
-/*
-void Vav::Parcellation::Parcellation::applyVolumeConstraintToDisplacementField(){
-    
-//    Declaration of displacement field region iterator
-    typedef itk::ImageRegionIterator<DisplacementFieldType> DisplacementRegionIteratorType;
-    DisplacementRegionIteratorType itDisplacement(displacementField, displacementField->GetLargestPossibleRegion());
-    itDisplacement.GoToBegin();
-    
-    typedef itk::ImageRegionIterator<ParcelImageType> ParcelImageRegionIteratorType;
-    ParcelImageRegionIteratorType itParcel(parcelImage, parcelImage->GetLargestPossibleRegion());
-    itParcel.GoToBegin();
-    
-    typedef itk::ImageRegionIterator<DirectionOfEvolutionImageType> DirectionImageRegionIteratorType;
-    DirectionImageRegionIteratorType itDirection(directionImage, directionImage->GetLargestPossibleRegion());
-    itDirection.GoToBegin();
-    
-    int segmentIndex = 0;
-    float weight = 0;
-    int counter = 0;
-    
-    while (!itParcel.IsAtEnd()) {
-        
-        if (itDirection.Get() != 0) {
-            segmentIndex = itParcel.Get() - 1;
-            if (segmentIndex < 0) {
-                std::cout << "There is a problem with segment labels in the cortex!!!!\n";
-                counter++;
-            }
-            weight = sigmoidFunction(parcelVolumeChanges[segmentIndex], volumeSigmoidConstant);
-            if (weight > 0.5) {
-                weight = 1 - weight;
-            }
-            if ((parcelVolumeChanges[segmentIndex] * itDirection.Get()) < 0) {
-                weight = 1 - weight;
-            }
-            itDisplacement.Value() *= weight;
-        }
-        ++itParcel;
-        ++itDirection;
-        ++itDisplacement;
-    }
-//    std::cout << "Number of problems is " << counter << std::endl;
-    
-}
- */
+
 
 //========================================================================
 
@@ -970,7 +926,7 @@ void Vav::Parcellation::Parcellation::calculate_and_switch()
     radius.Fill(1);
     ParcelImageConstNeighborhoodIteratorType itNeighborParcel(radius, parcelImage, parcelImage->GetLargestPossibleRegion());
     itNeighborParcel.GoToBegin();
-//    std::vector<float,>
+
     //    Offsets
     std::vector<ParcelImageConstNeighborhoodIteratorType::OffsetType> offsets = {{{-1,0,0}},{{1,0,0}},{{0,-1,0}},{{0,1,0}},{{0,0,-1}},{{0,0,1}}};
     std::vector<ParcelImageConstNeighborhoodIteratorType::OffsetType>::iterator itOffsets;
@@ -1094,8 +1050,8 @@ void Vav::Parcellation::Parcellation::calculateMeanCorrelations(){
 	std::vector<float> temp;
 	std::vector<int> temp_volume;
 
-	for (unsigned int i = 0; i < numberOfSegments; i++) {
-		//        std::cout << "Now, finding for segment " << i << std::endl;
+	for (unsigned int i = 0; i < numberOfSegments; i++) 
+	{
 
 		typedef itk::PointSet<vnl_vector<float>>::PointDataContainer PointDataContainer;
 		PointDataContainer::Pointer pointData = PointDataContainer::New();
@@ -1108,14 +1064,6 @@ void Vav::Parcellation::Parcellation::calculateMeanCorrelations(){
 
 		float sum = 0;
 		double counter = 0;
-
-		//        for (it1 = pointData->Begin(); it1 != pointData->End(); it1++) {
-		//            for (it2 = it1; it2 != pointData->End(); it2++) {
-		//                sum += double(dot_product(it1.Value(), it2.Value()));
-		//                counter += 1;
-		//                std::cout << counter << " ";
-		//            }
-		//        }
 
 		for (it1 = pointData->Begin(); it1 != pointData->End(); it1++) {
 			sum += float(dot_product(segmentMeans[i], it1.Value()));
@@ -1167,9 +1115,6 @@ int downsizeSpecificParcel(itk::Image<unsigned int,3>::Pointer parcelImage, unsi
     }
     
     center.operator*=(1/counter);
-//    Printing something
-//    std::cout << "There are " << counter << " voxels in parcel " << classLabel << std::endl;
-//    std::cout << "Center is " << center << std::endl;
     
     typedef itk::Statistics::WeightedCentroidKdTreeGenerator< SampleType > TreeGeneratorType;
     TreeGeneratorType::Pointer treeGenerator = TreeGeneratorType::New();
@@ -1195,16 +1140,6 @@ int downsizeSpecificParcel(itk::Image<unsigned int,3>::Pointer parcelImage, unsi
     
     EstimatorType::ParametersType estimatedMeans = estimator->GetParameters();
     
-    //    Printing estimated means
-    /*
-    for (unsigned int i = 0; i<2; i++) {
-        std::cout << "Center " << i << " is ";
-        for (int j = 0; j<3; j++) {
-            std::cout << estimatedMeans[3*i + j] << "  ";
-        }
-        std::cout << std::endl;
-    }
-    */
     
     typedef itk::Statistics::DistanceToCentroidMembershipFunction< MeasurementVectorType > MembershipFunctionType;
     typedef itk::Statistics::MinimumDecisionRule DecisionRuleType; DecisionRuleType::Pointer decisionRule = DecisionRuleType::New();
@@ -1260,8 +1195,6 @@ int downsizeSpecificParcel(itk::Image<unsigned int,3>::Pointer parcelImage, unsi
         }
         ++iter;
     }
-//    std::cout << "Class a has " << a << " elements.\n";
-//    std::cout << "Class b has " << b << " elements.\n";
     return a;
 }
 
@@ -1340,7 +1273,7 @@ void Vav::Parcellation::Parcellation::doSomethingg()
     calculateMeanCorrelations();
     warpParcelImage();
 
-		//calculate_and_switch();
+	//calculate_and_switch();
 
 		std::cout << "iteration : " << i << std::endl;
 	}
