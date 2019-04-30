@@ -91,8 +91,14 @@ Vav::Parcellation::Parcellation::ParcelImageType::PixelType GetNewLabel(Vav::Par
 
 }
 
-void Vav::Parcellation::Parcellation::Update()
-{
+void Vav::Parcellation::Parcellation::Update(){
+	/*
+	This function performs most of the preprocessing part. It 
+	-	initializes images
+	-	finds the labels used for cortex
+	-	changes labels of the cortex to 1,2,3,...
+	-	changes the type of the fMRI image
+	*/
 
 	//    Performance calculation variables declared
 	std::clock_t startTime, endTime;
@@ -216,7 +222,6 @@ void Vav::Parcellation::Parcellation::Update()
 	endTime = clock();
 	std::cout << "4D fmri to 3D fmri transformation completed in " << double(endTime - startTime) / CLOCKS_PER_SEC << " seconds.\n";
 
-
 	//    Starting subtracting mean from time signals...
 	startTime = clock();
 	itFMRI.GoToBegin();
@@ -229,25 +234,27 @@ void Vav::Parcellation::Parcellation::Update()
 	endTime = clock();
 	std::cout << "Means of fmri signals subtracted in " << double(endTime - startTime) / CLOCKS_PER_SEC << " seconds.\n";
 	std::cout << "Parcellation update done.\n";
-
 }
-//Parcellation Update End
-//------------------------------------------------------------------------------------
 
-std::vector<Vav::Parcellation::Parcellation::ParcelImageType::PixelType> Vav::Parcellation::Parcellation::GetLabels()
-{
+
+
+
+std::vector<Vav::Parcellation::Parcellation::ParcelImageType::PixelType> Vav::Parcellation::Parcellation::GetLabels(){
 	return labels;
 }
 
-Vav::Parcellation::Parcellation::ParcelImageType::Pointer Vav::Parcellation::Parcellation::GetInitialParcelImage()
-{
+
+
+Vav::Parcellation::Parcellation::ParcelImageType::Pointer Vav::Parcellation::Parcellation::GetInitialParcelImage(){
 	return initialParcelImage;
 }
 
-Vav::Parcellation::Parcellation::FMRIImageType::Pointer Vav::Parcellation::Parcellation::GetVectorFMRIImage()
-{
+
+
+Vav::Parcellation::Parcellation::FMRIImageType::Pointer Vav::Parcellation::Parcellation::GetVectorFMRIImage(){
 	return fmriImage;
 }
+
 
 void Vav::Parcellation::Parcellation::createFinalParcelImage()
 {
@@ -298,16 +305,12 @@ void Vav::Parcellation::Parcellation::createFinalParcelImage()
 }
 
 
-<<<<<<< HEAD
 void Vav::Parcellation::Parcellation::findSegmentInformation()
 {
-=======
-void Vav::Parcellation::Parcellation::findSegmentInformation(){
 	/*
 	This function if used to generate segment representative signals, which is in this case, 
 	summary signals obtained using SVD decomposition. In order to do this,
 	*/
->>>>>>> b6f61ac24da1be691423e66f41b1e72f37176238
 	std::cout << "Starting finding segment information..." << std::endl;
 	std::clock_t startTime = std::clock();
 	std::clock_t startTimeTop = std::clock();
