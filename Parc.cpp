@@ -11,7 +11,6 @@ Vav::Parcellation::Parcellation::~Parcellation()
 }
 
 
-
 void Vav::Parcellation::Parcellation::SetParcelImage(ParcelImageType::Pointer p)
 {
 	/*
@@ -185,7 +184,7 @@ void Vav::Parcellation::Parcellation::Update(){
 	std::cout << "Labels of parcel images is changed as 1,2,3... and stored in " << double(endTime - startTime) / CLOCKS_PER_SEC << " seconds.\n";
 
 
-	//    4D FMRI image is transformed into a 3D vector image
+	// 4D FMRI image is transformed into a 3D vector image
 	// We used vector multiplication to calculate correlation coefficients, for that, we need fmri
 	// signals to be vectors. That is why we transform 4D fmri image into 3D image that contains time signals at each voxel.
 	std::cout << "Starting 4D fmri to 3D fmri transformation...\n";
