@@ -9,7 +9,7 @@
 #include <fstream>
 #include <string>
 
-#include "Parc.h"
+#include "Parcellation.h"
 
 int main(int argc, char *argv[])
 {

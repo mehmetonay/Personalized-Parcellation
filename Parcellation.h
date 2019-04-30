@@ -37,6 +37,7 @@
 #include "itkMinimumDecisionRule.h"
 #include "itkSampleClassifierFilter.h"
 
+//VTK Libraries
 
 namespace Vav {
     namespace Parcellation {
@@ -158,7 +159,5 @@ namespace Vav {
         
     }
 }
-
-
 
 #endif /* Parcellation_hpp */
