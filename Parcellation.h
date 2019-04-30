@@ -1,5 +1,5 @@
 // Umut Küçükaslan
-// Mehmet Said Onay
+// Mehmet Onay
 
 #ifndef Parcellation_h
 #define Parcellation_h
