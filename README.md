@@ -15,6 +15,7 @@ Python code can be shown like
 import os
 
 print("hey man")
+```
 
 C++ code can be shown as 
 ```c++
@@ -26,3 +27,6 @@ main(){
 
 ##header 2
 Something about header 2
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
